@@ -9,7 +9,6 @@ public class Singleton {
 	public static Singleton getInstance(String url, String baseDatos) {
 
 		if (instance == null) {
-
 			instance = new Singleton(url, baseDatos);
 		}
 		return instance;
