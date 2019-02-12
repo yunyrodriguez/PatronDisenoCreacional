@@ -13,8 +13,8 @@ public class AbstractFactoryTest {
 	}
 
 	private static void obtainProduct(AbstractFactory instancia1, AbstractFactory instancia2) {
-		System.out.println(instancia1.comprarDisco().getDisco());
-		System.out.println(instancia2.comprarMemoria().getMemoria());
+		System.out.println(instancia1.buyMemory().getMemory());
+		System.out.println(instancia2.buyMemory().getMemory());
 	}
 
 }

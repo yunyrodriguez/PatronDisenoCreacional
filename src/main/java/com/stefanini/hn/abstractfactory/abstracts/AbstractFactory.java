@@ -1,6 +1,21 @@
 package com.stefanini.hn.abstractfactory.abstracts;
 
+/**
+ * A factory for creating Abstract objects.
+ */
 public abstract class AbstractFactory {
-	public abstract Disco comprarDisco();
-	public abstract Memoria comprarMemoria();
+	
+	/**
+	 * Buy disc.
+	 *
+	 * @return the disco
+	 */
+	public abstract Disco buyDisc();
+	
+	/**
+	 * Buy memory.
+	 *
+	 * @return the memoria
+	 */
+	public abstract Memoria buyMemory();
 }

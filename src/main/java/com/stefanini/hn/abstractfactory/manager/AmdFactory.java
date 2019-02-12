@@ -4,12 +4,24 @@ import com.stefanini.hn.abstractfactory.abstracts.AbstractFactory;
 import com.stefanini.hn.abstractfactory.abstracts.Disco;
 import com.stefanini.hn.abstractfactory.abstracts.Memoria;
 
+/**
+ * A factory for creating Amd objects.
+ */
 public class AmdFactory extends AbstractFactory {
-	public Disco comprarDisco() {
+
+	/* (non-Javadoc)
+	 * @see com.stefanini.hn.abstractfactory.abstracts.AbstractFactory#buyDisc()
+	 */
+	@Override
+	public Disco buyDisc() {
 		return new DiscoAmd();
 	}
 
-	public Memoria comprarMemoria() {
+	/* (non-Javadoc)
+	 * @see com.stefanini.hn.abstractfactory.abstracts.AbstractFactory#buyMemory()
+	 */
+	@Override
+	public Memoria buyMemory() {
 		return new MemoriaAmd();
 	}
 

@@ -3,15 +3,30 @@ package com.stefanini.hn.builder.manager;
 import com.stefanini.hn.builder.abstracts.PizzaBuilder;
 
 public class PicantePizzaBuilder extends PizzaBuilder {
-	public void buildMasa() {
-		pizza.setMasa("cocida");
+
+	/* (non-Javadoc)
+	 * @see com.stefanini.hn.builder.abstracts.PizzaBuilder#buildDough()
+	 */
+	@Override
+	public void buildDough() {
+		pizza.setDough("cocida");
 	}
 
-	public void buildSalsa() {
-		pizza.setSalsa("picante");
+
+	/* (non-Javadoc)
+	 * @see com.stefanini.hn.builder.abstracts.PizzaBuilder#buildSauce()
+	 */
+	@Override
+	public void buildSauce() {
+		pizza.setSauce("picante");
 	}
 
-	public void buildRelleno() {
-		pizza.setRelleno("pimienta+salchichón");
+
+	/* (non-Javadoc)
+	 * @see com.stefanini.hn.builder.abstracts.PizzaBuilder#buildFilling()
+	 */
+	@Override
+	public void buildFilling() {
+		pizza.setFilling("pimienta+salchichón");
 	}
 }
