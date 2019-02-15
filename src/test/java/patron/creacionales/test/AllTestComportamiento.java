@@ -17,6 +17,8 @@ import patron.comportamiento.interpreter.HundredExpression;
 import patron.comportamiento.interpreter.OneExpression;
 import patron.comportamiento.interpreter.TenExpression;
 import patron.comportamiento.interpreter.ThousandExpression;
+import patron.comportamiento.iterador.Division;
+import patron.comportamiento.iterador.Empleado;
 
 public class AllTestComportamiento {
 	
@@ -40,7 +42,7 @@ public class AllTestComportamiento {
 	
 	@Test
 	public void interpreter() {
-		String romano ="LXI";
+		String romano ="IX";
 		Context context = new Context(romano);
 		ArrayList<Expression> tree = new ArrayList<Expression>();
 		tree.add(new ThousandExpression());
@@ -53,9 +55,21 @@ public class AllTestComportamiento {
 				Expression exp = it.next();
 				exp.interpret(context);
 			}
-			
+			System.out.println("**** Interpreter ****");
 		System.out.println(context.output);
 		
+	}
+	@Test
+	public void iterator() {
+		Division d = new Division("Mi Sucursal");
+		d.add("Empleado 1");
+		d.add("Empleado 2");
+		
+		Iterator<Empleado> iter = d.iterator();
+		while (iter.hasNext()) {
+			Empleado e = (Empleado) iter.next();
+			e.print();
+		}
 	}
 	
 	
