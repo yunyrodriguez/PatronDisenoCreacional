@@ -26,6 +26,8 @@ import com.stefanini.hn.dis.comportamiento.interpreter.manager.HundredExpression
 import com.stefanini.hn.dis.comportamiento.interpreter.manager.OneExpression;
 import com.stefanini.hn.dis.comportamiento.interpreter.manager.TenExpression;
 import com.stefanini.hn.dis.comportamiento.interpreter.manager.ThousandExpression;
+import com.stefanini.hn.dis.comportamiento.iterator.manager.Division;
+import com.stefanini.hn.dis.comportamiento.iterator.manager.Employee;
 import com.stefanini.hn.dis.estructural.adapter.manager.OldPerson;
 import com.stefanini.hn.dis.estructural.adapter.manager.OldToNewPerson;
 import com.stefanini.hn.dis.estructural.bridger.manager.Circle;
@@ -171,6 +173,21 @@ public class AllTest {
 			exp.interpreter(context);
 		}
 		System.out.println(context.output);
+		System.out.println("");
+	}
+	@Test
+	public void iterator() {
+		System.out.println("**Iterator**");
+		Division division = new Division("Mi Sucursal");
+		division.add("Empleado 1");
+		division.add("Empleado 2");
+		
+		Iterator<Employee> iterator = division.iterator();
+		while (iterator.hasNext()) {
+			Employee employee = (Employee) iterator.next();
+			employee.print();
+			employee.toString();
+		}
 		System.out.println("");
 	}
 }
