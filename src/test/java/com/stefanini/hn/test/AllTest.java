@@ -14,6 +14,10 @@ import com.stefanini.hn.builder.manager.HawaiPizzaBuilder;
 import com.stefanini.hn.builder.manager.PicantePizzaBuilder;
 import com.stefanini.hn.builder.manager.Pizza;
 import com.stefanini.hn.dis.comportamiento.chainresponsability.manager.Bank;
+import com.stefanini.hn.dis.comportamiento.command.manager.Command;
+import com.stefanini.hn.dis.comportamiento.command.manager.HondurasServer;
+import com.stefanini.hn.dis.comportamiento.command.manager.Invoker;
+import com.stefanini.hn.dis.comportamiento.command.manager.OnServer;
 import com.stefanini.hn.dis.estructural.adapter.manager.OldPerson;
 import com.stefanini.hn.dis.estructural.adapter.manager.OldToNewPerson;
 import com.stefanini.hn.dis.estructural.bridger.manager.Circle;
@@ -132,6 +136,13 @@ public class AllTest {
 		Bank bank = new Bank();
 		bank.loanRequest(56000);
 		System.out.println("");
+	}
+	
+	@Test
+	public void command() {
+		Command command = new OnServer(new HondurasServer());
+	    Invoker serverAdmin = new Invoker(command);
+	    serverAdmin.running();
 	}
 
 }
