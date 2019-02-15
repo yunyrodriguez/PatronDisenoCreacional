@@ -1,7 +1,9 @@
 package com.stefanini.hn.test;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 
 import org.junit.Test;
 
@@ -18,6 +20,12 @@ import com.stefanini.hn.dis.comportamiento.command.manager.Command;
 import com.stefanini.hn.dis.comportamiento.command.manager.HondurasServer;
 import com.stefanini.hn.dis.comportamiento.command.manager.Invoker;
 import com.stefanini.hn.dis.comportamiento.command.manager.OnServer;
+import com.stefanini.hn.dis.comportamiento.interpreter.abstracts.Expression;
+import com.stefanini.hn.dis.comportamiento.interpreter.manager.Context;
+import com.stefanini.hn.dis.comportamiento.interpreter.manager.HundredExpression;
+import com.stefanini.hn.dis.comportamiento.interpreter.manager.OneExpression;
+import com.stefanini.hn.dis.comportamiento.interpreter.manager.TenExpression;
+import com.stefanini.hn.dis.comportamiento.interpreter.manager.ThousandExpression;
 import com.stefanini.hn.dis.estructural.adapter.manager.OldPerson;
 import com.stefanini.hn.dis.estructural.adapter.manager.OldToNewPerson;
 import com.stefanini.hn.dis.estructural.bridger.manager.Circle;
@@ -90,26 +98,25 @@ public class AllTest {
 		System.out.println(aCreator.anOperation().perform());
 		System.out.println("");
 	}
-	
+
 	@Test
 	public void adapter() {
-		
+
 		System.out.println("**Adapter**");
 		OldPerson oldPerson = new OldPerson();
 		oldPerson.setLastName("Campbell");
 		oldPerson.setFirstName("Joel");
-		GregorianCalendar calendar= new GregorianCalendar();
+		GregorianCalendar calendar = new GregorianCalendar();
 		calendar.set(2000, 01, 01);
 		Date date = calendar.getTime();
 		oldPerson.setBirthdate(date);
-		
-		
+
 		OldToNewPerson newPerson = new OldToNewPerson(oldPerson);
 		outPut(newPerson);
 
 		newPerson.setAge(18);
 		newPerson.setName("Oscar Garcia");
-		
+
 		outPut(newPerson);
 		System.out.println("");
 	}
@@ -118,18 +125,18 @@ public class AllTest {
 		System.out.println(newPerson.getAge());
 		System.out.println(newPerson.getName());
 	}
-	
+
 	@Test
 	public void bridge() {
 		System.out.println("**Bridge**");
 		Rectangle rectangle = new Rectangle(new DottedDrawing(), 1, 1, 2, 2);
 		rectangle.draw();
-		
+
 		Circle circle = new Circle(new NormalDrawing(), 2, 2, 3);
 		circle.draw();
 		System.out.println("");
 	}
-	
+
 	@Test
 	public void chainResponsability() {
 		System.out.println("**Chain of Responsability**");
@@ -137,12 +144,33 @@ public class AllTest {
 		bank.loanRequest(56000);
 		System.out.println("");
 	}
-	
+
 	@Test
 	public void command() {
+		System.out.println("**Command**");
 		Command command = new OnServer(new HondurasServer());
-	    Invoker serverAdmin = new Invoker(command);
-	    serverAdmin.running();
+		Invoker serverAdmin = new Invoker(command);
+		serverAdmin.running();
+		System.out.println("");
 	}
 
+	@Test
+	public void interpreter() {
+		System.out.println("**Interpreter**");
+		String roman = "XVIII";
+		Context context = new Context(roman);
+		ArrayList<Expression> tree = new ArrayList<Expression>();
+		tree.add(new ThousandExpression());
+		tree.add(new HundredExpression());
+		tree.add(new TenExpression());
+		tree.add(new OneExpression());
+
+		Iterator<Expression> it = tree.iterator();
+		while (it.hasNext()) {
+			Expression exp = it.next();
+			exp.interpreter(context);
+		}
+		System.out.println(context.output);
+		System.out.println("");
+	}
 }
