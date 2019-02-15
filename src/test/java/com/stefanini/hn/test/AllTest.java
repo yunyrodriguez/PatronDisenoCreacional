@@ -13,6 +13,7 @@ import com.stefanini.hn.builder.manager.Cocina;
 import com.stefanini.hn.builder.manager.HawaiPizzaBuilder;
 import com.stefanini.hn.builder.manager.PicantePizzaBuilder;
 import com.stefanini.hn.builder.manager.Pizza;
+import com.stefanini.hn.dis.comportamiento.chainresponsability.manager.Bank;
 import com.stefanini.hn.dis.estructural.adapter.manager.OldPerson;
 import com.stefanini.hn.dis.estructural.adapter.manager.OldToNewPerson;
 import com.stefanini.hn.dis.estructural.bridger.manager.Circle;
@@ -89,7 +90,7 @@ public class AllTest {
 	@Test
 	public void adapter() {
 		
-		System.out.println("**Adapter*");
+		System.out.println("**Adapter**");
 		OldPerson oldPerson = new OldPerson();
 		oldPerson.setLastName("Campbell");
 		oldPerson.setFirstName("Joel");
@@ -116,12 +117,21 @@ public class AllTest {
 	
 	@Test
 	public void bridge() {
-		
+		System.out.println("**Bridge**");
 		Rectangle rectangle = new Rectangle(new DottedDrawing(), 1, 1, 2, 2);
 		rectangle.draw();
 		
 		Circle circle = new Circle(new NormalDrawing(), 2, 2, 3);
 		circle.draw();
+		System.out.println("");
+	}
+	
+	@Test
+	public void chainResponsability() {
+		System.out.println("**Chain of Responsability**");
+		Bank bank = new Bank();
+		bank.loanRequest(56000);
+		System.out.println("");
 	}
 
 }
