@@ -19,6 +19,11 @@ import patron.comportamiento.interpreter.TenExpression;
 import patron.comportamiento.interpreter.ThousandExpression;
 import patron.comportamiento.iterador.Division;
 import patron.comportamiento.iterador.Empleado;
+import patron.comportamiento.mediator.SalonDeChat;
+import patron.comportamiento.mediator.Usuario;
+import patron.comportamiento.memento.Caretaker;
+import patron.comportamiento.memento.Memento;
+import patron.comportamiento.memento.Persona;
 
 public class AllTestComportamiento {
 	
@@ -72,5 +77,48 @@ public class AllTestComportamiento {
 		}
 	}
 	
+	@Test
+	public void mediator() {
+		SalonDeChat s = new SalonDeChat();
+		
+		Usuario u = new Usuario(s);
+		u.setNombre("Sarahí");
+		s.registra(u);
+		
+		Usuario u1 = new Usuario(s);
+		u1.setNombre("Joel");
+		s.registra(u1);
+		
+		Usuario u2 = new Usuario(s);
+		u2.setNombre("Pedro");
+		s.registra(u2);
+		
+		u.envia("Joel", "hola que tal estas?");
+		u1.envia("Sarahí", "Todo bien, gracias y vos?");
+		u2.envia("Yuny", "Yuny como estas?");
+	}
 	
+	@Test
+	public void memento() {
+		Caretaker caretaker = new Caretaker();
+		Persona p = new Persona();
+		p.setNombre("Juan");
+		p.setNombre("Pedro");
+		
+		caretaker.addMemento(p.saveToMemento());
+		
+		p.setNombre("Paco");
+		
+		caretaker.addMemento(p.saveToMemento());
+		
+		p.setNombre("Mateo");
+		
+		Memento m1 = caretaker.getMemento(0);
+		Memento m2 = caretaker.getMemento(1);
+		
+		
+		
+		System.out.println(m1.getSavedState());
+		System.out.println(m2.getSavedState());
+	}
 }
