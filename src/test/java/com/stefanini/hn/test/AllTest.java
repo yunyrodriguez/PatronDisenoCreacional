@@ -28,6 +28,28 @@ import com.stefanini.hn.dis.comportamiento.interpreter.manager.TenExpression;
 import com.stefanini.hn.dis.comportamiento.interpreter.manager.ThousandExpression;
 import com.stefanini.hn.dis.comportamiento.iterator.manager.Division;
 import com.stefanini.hn.dis.comportamiento.iterator.manager.Employee;
+import com.stefanini.hn.dis.comportamiento.mediator.manager.ChatRoom;
+import com.stefanini.hn.dis.comportamiento.mediator.manager.User;
+import com.stefanini.hn.dis.comportamiento.memento.manager.Caretaker;
+import com.stefanini.hn.dis.comportamiento.memento.manager.Memento;
+import com.stefanini.hn.dis.comportamiento.memento.manager.Person;
+import com.stefanini.hn.dis.comportamiento.observer.manager.Book;
+import com.stefanini.hn.dis.comportamiento.observer.manager.BookAlarm;
+import com.stefanini.hn.dis.comportamiento.observer.manager.Library;
+import com.stefanini.hn.dis.comportamiento.observer.manager.Manager;
+import com.stefanini.hn.dis.comportamiento.observer.manager.Purchases;
+import com.stefanini.hn.dis.comportamiento.observer.manager.Stock;
+import com.stefanini.hn.dis.comportamiento.state.manager.BankState;
+import com.stefanini.hn.dis.comportamiento.state.manager.PersonState;
+import com.stefanini.hn.dis.comportamiento.strategy.manager.BookFinder;
+import com.stefanini.hn.dis.comportamiento.strategy.manager.Partner;
+import com.stefanini.hn.dis.comportamiento.templatemethod.manager.Client;
+import com.stefanini.hn.dis.comportamiento.templatemethod.manager.EmployeeTemplate;
+import com.stefanini.hn.dis.comportamiento.templatemethod.manager.PartnerTemplate;
+import com.stefanini.hn.dis.comportamiento.templatemethod.manager.PersonTemplate;
+import com.stefanini.hn.dis.comportamiento.visitor.manager.DiscountProduct;
+import com.stefanini.hn.dis.comportamiento.visitor.manager.IVA;
+import com.stefanini.hn.dis.comportamiento.visitor.manager.ProductNormal;
 import com.stefanini.hn.dis.estructural.adapter.manager.OldPerson;
 import com.stefanini.hn.dis.estructural.adapter.manager.OldToNewPerson;
 import com.stefanini.hn.dis.estructural.bridger.manager.Circle;
@@ -189,5 +211,123 @@ public class AllTest {
 			employee.toString();
 		}
 		System.out.println("");
+	}
+	
+	@Test
+	public void mediator () {
+		System.out.println("**Mediator**");
+		ChatRoom room = new ChatRoom();
+		User user = new User(room);
+		user.setName("Carlos");
+		room.register(user);
+		
+		User user2 = new User(room);
+		user2.setName("Logan");
+		room.register(user2);
+		
+		User user3 = new User(room);
+		user3.setName("Santiago");
+		room.register(user3);
+		
+		user.send("Logan", "Hola que tal");
+		user2.send("Carlos", "Todo tranquilo y vos?");
+		user3.send("Oscar", "Oscar estas?");
+		System.out.println("");
+	}
+	@Test
+	public void memento() {
+		System.out.println("**Memento**");
+		Caretaker caretaker = new Caretaker();
+		
+		Person  person = new Person();
+		person.setName("Julio");
+		person.setName("Ramon");
+		
+		caretaker.addMemento(person.saveToMemento());
+		person.setName("Carmen");
+		
+		caretaker.addMemento(person.saveToMemento());
+		person.setName("Mariana");
+		Memento memento1 = caretaker.getMemento(0);
+		Memento memento2 = caretaker.getMemento(1);
+		
+		System.out.println(memento1.getSavedState());
+		System.out.println(memento2.getSavedState());
+		System.out.println("");
+	}
+	
+	@Test
+	public void observer() {
+		System.out.println("**Observer**");
+		BookAlarm alarm = new BookAlarm();
+		alarm.attach(new Purchases());
+		alarm.attach(new Manager());
+		alarm.attach(new Stock());
+		Book book = new Book();
+		book.setState("Malo");
+
+		Library library = new Library();
+		library.returnBook(book);
+		System.out.println("");
+	}
+	
+	@Test
+	public void state() {
+		System.out.println("**State**");
+		PersonState person1 = new PersonState("Sofia", "Gomez", 25);
+		PersonState person2 = new PersonState("Asthon", "Kuthcher", 65);
+		PersonState person3 = new PersonState("Ronaldo", "Ramirez", 40);
+		PersonState person4 = new PersonState("Oscar", "Guiti", 100);
+		
+		BankState bank = new BankState();
+		bank.attend(person1);
+		bank.windowSuspend();
+		
+		bank.attend(person2);
+		bank.attend(person3);
+		
+		bank.closeWindow();
+		bank.attend(person4);
+		System.out.println("");
+	}
+	
+	@Test
+	public void strategy() {
+		System.out.println("**Strategy**");
+		Partner partner = new Partner();
+		Book book = new BookFinder().findBook(partner,"Libro de java");
+		System.out.println(book.getState());
+		System.out.println("");
+	}
+	@Test
+	public void templateMethod() {
+		System.out.println("**Template Method**");
+		PersonTemplate person = new Client(12121);
+		System.out.println("El cliente dice: ");
+		System.out.println(person.identify());
+		
+		System.out.println("El empleado dice: ");
+		person = new EmployeeTemplate("AD 42157");
+		System.out.println(person.identify());
+		
+		System.out.println("El socio dice: ");
+		person = new PartnerTemplate(45474);
+		System.out.println(person.identify());
+		System.out.println("");
+	}
+	@Test
+	public void visitor() {
+		
+		DiscountProduct product1 = new DiscountProduct();
+		product1.setPrice(100);
+		ProductNormal product2 = new ProductNormal();
+		product2.setPrice(100);
+		
+		IVA iva = new IVA();
+		double result1 = product1.accept(iva);
+		double result2 = product2.accept(iva);
+		
+		System.out.println(result1);
+		System.out.println(result2);
 	}
 }

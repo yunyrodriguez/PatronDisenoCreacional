@@ -1,0 +1,15 @@
+package com.stefanini.hn.dis.comportamiento.memento.manager;
+
+public class Memento {
+
+	private String state;
+
+	public Memento(String state) {
+		this.state = state;
+	}
+	
+	public String getSavedState() {
+		return state;
+	}
+	
+}
