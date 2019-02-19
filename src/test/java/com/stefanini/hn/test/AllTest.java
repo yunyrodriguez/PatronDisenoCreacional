@@ -56,6 +56,18 @@ import com.stefanini.hn.dis.estructural.bridger.manager.Circle;
 import com.stefanini.hn.dis.estructural.bridger.manager.DottedDrawing;
 import com.stefanini.hn.dis.estructural.bridger.manager.NormalDrawing;
 import com.stefanini.hn.dis.estructural.bridger.manager.Rectangle;
+import com.stefanini.hn.dis.estructural.composite.manager.Compound;
+import com.stefanini.hn.dis.estructural.composite.manager.Sheet;
+import com.stefanini.hn.dis.estructural.decorator.manager.PersonDecorator;
+import com.stefanini.hn.dis.estructural.decorator.manager.UndercoverAgent;
+import com.stefanini.hn.dis.estructural.facade.manager.AccountsPayable;
+import com.stefanini.hn.dis.estructural.facade.manager.ClientFacade;
+import com.stefanini.hn.dis.estructural.facade.manager.Interested;
+import com.stefanini.hn.dis.estructural.facade.manager.RealEstate;
+import com.stefanini.hn.dis.estructural.facade.manager.RealEstateSale;
+import com.stefanini.hn.dis.estructural.facade.manager.RentalAdministration;
+import com.stefanini.hn.dis.estructural.facade.manager.ShowProperty;
+import com.stefanini.hn.dis.estructural.flyweight.manager.StudentFlyweight;
 import com.stefanini.hn.factorymethod.abstracts.Creator;
 import com.stefanini.hn.factorymethod.manager.ConcreteCreator;
 import com.stefanini.hn.prototype.manager.FactoriaPrototipo;
@@ -318,6 +330,7 @@ public class AllTest {
 	@Test
 	public void visitor() {
 		
+		System.out.println("**Visitor**");
 		DiscountProduct product1 = new DiscountProduct();
 		product1.setPrice(100);
 		ProductNormal product2 = new ProductNormal();
@@ -329,5 +342,94 @@ public class AllTest {
 		
 		System.out.println(result1);
 		System.out.println(result2);
+		System.out.println("");
+	}
+	
+	@Test
+	public void composite() {
+		
+		System.out.println("**Composite**");
+		Compound root = new Compound("root");
+		root.add(new Sheet("hoja A"));
+		root.add(new Sheet("hoja b"));
+		Compound comp = new Compound("compuesto X");
+		comp.add(new Sheet("hoja XA"));
+		comp.add(new Sheet("hoja XB"));
+		root.add(comp);
+		root.add(new Sheet("hoja C"));
+		Sheet l = new Sheet("hoja D");
+		root.add(l);
+		root.delete(l);
+		root.show(1);
+		System.out.println("");
+	}
+	
+	@Test
+	public void decorator() {
+		
+		System.out.println("**Decorator**");
+		PersonDecorator person = new PersonDecorator();
+	    person.setName("Sofia");
+	    person.setLastName("Ulloa");
+	    person.setDni("788748754875");
+	    person.setAge(60);
+	    person.setAddress("col. trapiche");
+	    
+	    System.out.println("Datos de persona");
+	    System.out.println(person.getLastName() + ", "+ person.getName());
+	    System.out.println(person.getDni());
+	    System.out.println(person.getAddress());
+	    System.out.println(person.getAge());
+	    
+	    System.out.println("Datos del agente");
+	    UndercoverAgent agent = new UndercoverAgent(person);
+	    System.out.println(agent.getLastName()+", "+agent.getName());
+	    System.out.println(agent.getDNI());
+	    System.out.println(agent.getAddress());
+	    System.out.println(agent.getAge());
+	    System.out.println("");
+	}
+	@Test
+	public void facade() {
+		
+		System.out.println("**Facade**");
+		ClientFacade c = new ClientFacade();
+		Interested i = new Interested();
+		
+		RealEstate real = new RealEstate();
+		real.customerCare(c);
+		real.interestedAttention(i);
+		ShowProperty showProperty = new ShowProperty();
+		showProperty.showProperty(123);
+		RealEstateSale sale = new RealEstateSale();
+		sale.managementSale();
+		RentalAdministration rental = new RentalAdministration();
+		rental.payment(1200);
+		AccountsPayable accountsPayable = new AccountsPayable();
+		accountsPayable.ownerPayment(1100);
+		
+		RealEstate real2 = new RealEstate();
+		real2.attention(i);
+		real2.attention(c);
+		System.out.println("");
+	}
+	
+	@Test
+	public void flyweight() {
+		
+		System.out.println("**Flyweight**");
+		double averageStudent = 6;
+		String names[] = {"Carlos","Maria","Pedro"};
+		String lastNames[] = {"Ventura","Fiallos","Rodriguez"};
+	    double average[] = {6,7,9};
+	    
+	    StudentFlyweight student = new StudentFlyweight(averageStudent);
+	    for(int i = 0; i < names.length; i++) {
+	    	student.setName(names[i]);
+	    	student.setLastName(lastNames[i]);
+	    	student.setAverage(average[i]);
+	    	System.out.println(names[i]+":"+student.compare());
+	    }
+	    System.out.println("");
 	}
 }
