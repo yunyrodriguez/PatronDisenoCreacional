@@ -25,6 +25,16 @@ import patron.estructurales.decorator.FordFiesta;
 import patron.estructurales.decorator.Gasoil;
 import patron.estructurales.decorator.Mp3Player;
 import patron.estructurales.decorator.Vendible;
+import patron.estructurales.facade.AdministracionAlquiler;
+import patron.estructurales.facade.Cliente;
+import patron.estructurales.facade.CuentasAPagar;
+import patron.estructurales.facade.Inmobiliaria;
+import patron.estructurales.facade.Interesado;
+import patron.estructurales.facade.MuestraPropiedad;
+import patron.estructurales.facade.VentaInmueble;
+import patron.estructurales.flyweight.Alumno;
+import patron.estructurales.wrapper.AgenteEncubierto;
+import patron.estructurales.wrapper.PersonaWrapper;
 
 public class AllTestEstructurales {
 	@Test
@@ -106,5 +116,63 @@ public class AllTestEstructurales {
 		
 		System.out.println(auto2.getDescripcion());
 		System.out.println("Su precio es: " + auto2.getPrecio());
+	}
+	
+	@Test
+	public void flyweight() {
+		double promedioDelAlumnado = 6;
+		String nombres[] = {"Juan", "MAxi", "Pedro"};
+		String apellidos[] = {"Perez", "Lopez", "Minna"};
+		double promedios[] = {6,7,9};
+		
+		Alumno alumno = new Alumno(promedioDelAlumnado);
+		for(int i =0; i<nombres.length; i++) {
+			alumno.setNombre(nombres[i]);
+			alumno.setApellido(apellidos[i]);
+			alumno.setPromedio(promedios[i]);
+			System.out.println("**** Test flyweight****");
+			System.out.println(nombres[i]+ ": "+ alumno.compara());
+		}
+	}
+	
+	@Test
+	public void facade() {
+		Cliente c = new Cliente();
+		Interesado i = new Interesado();
+		
+		Inmobiliaria inmo = new  Inmobiliaria();
+		inmo.atencionCliente(c);
+		inmo.atencionInteresado(i);
+		MuestraPropiedad muestraPropiedad = new MuestraPropiedad();
+		muestraPropiedad.mostraPropiedad(123);
+		VentaInmueble venta = new VentaInmueble();
+		venta.gestionaVenta();
+		AdministracionAlquiler alquiler = new AdministracionAlquiler();
+		alquiler.cobro(1200);
+		CuentasAPagar cuentasAPagar = new CuentasAPagar();
+	}
+	
+	@Test
+	public void wrapper() {
+		PersonaWrapper personaWrapper = new PersonaWrapper();
+		personaWrapper.setNombre("Juan");
+		personaWrapper.setApellido("Gilli");
+		personaWrapper.setDni("3243232590");
+		personaWrapper.setEdad(43);
+		personaWrapper.setDomicilio("Av Rivadivia 423");
+		System.out.println("   ");
+		System.out.println("***** TEST Wrapper ***** ");
+		System.out.println("Datos de la persona: ");
+		System.out.println(personaWrapper.getApellido() + ", " +personaWrapper.getNombre());
+		System.out.println(personaWrapper.getDni());
+		System.out.println(personaWrapper.getDomicilio());
+		System.out.println(personaWrapper.getEdad());
+		
+		System.out.println("Datos del agente: ");
+		AgenteEncubierto agente = new AgenteEncubierto(personaWrapper);
+		System.out.println(agente.getApellido()+", " +agente.getNombre());
+		System.out.println(agente.getDni());
+		System.out.println(agente.getDomicilio());
+		System.out.println(agente.getEdad());
 	}
 }
