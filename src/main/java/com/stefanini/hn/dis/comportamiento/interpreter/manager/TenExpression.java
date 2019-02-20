@@ -1,6 +1,5 @@
 package com.stefanini.hn.dis.comportamiento.interpreter.manager;
 
-import com.stefanini.hn.dis.comportamiento.interpreter.abstracts.Expression;
 
 public class TenExpression extends Expression{
 

@@ -1,4 +1,4 @@
-package com.stefanini.hn.dis.estructural.bridge.abstracts;
+package com.stefanini.hn.dis.estructural.bridger.manager;
 
 public abstract class Drawing {
 

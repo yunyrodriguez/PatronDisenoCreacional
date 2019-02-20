@@ -1,4 +1,4 @@
-package com.stefanini.hn.abstractfactory.abstracts;
+package com.stefanini.hn.abstractfactory.manager;
 
 /**
  * A factory for creating Abstract objects.

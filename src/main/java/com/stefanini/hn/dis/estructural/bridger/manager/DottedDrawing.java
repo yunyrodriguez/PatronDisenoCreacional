@@ -1,6 +1,5 @@
 package com.stefanini.hn.dis.estructural.bridger.manager;
 
-import com.stefanini.hn.dis.estructural.bridge.abstracts.Drawing;
 
 public class DottedDrawing extends Drawing{
 

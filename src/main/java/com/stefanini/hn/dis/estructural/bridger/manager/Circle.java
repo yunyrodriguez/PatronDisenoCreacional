@@ -1,7 +1,5 @@
 package com.stefanini.hn.dis.estructural.bridger.manager;
 
-import com.stefanini.hn.dis.estructural.bridge.abstracts.Drawing;
-import com.stefanini.hn.dis.estructural.bridge.abstracts.Form;
 
 public class Circle extends Form{
 

@@ -1,4 +1,4 @@
-package com.stefanini.hn.builder.abstracts;
+package com.stefanini.hn.builder.manager;
 
 import com.stefanini.hn.builder.manager.Pizza;
 

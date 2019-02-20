@@ -1,6 +1,5 @@
 package com.stefanini.hn.abstractfactory.manager;
 
-import com.stefanini.hn.abstractfactory.abstracts.Disco;
 
 /**
  * DiscoAmd.

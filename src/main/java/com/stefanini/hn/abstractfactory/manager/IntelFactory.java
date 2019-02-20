@@ -1,8 +1,5 @@
 package com.stefanini.hn.abstractfactory.manager;
 
-import com.stefanini.hn.abstractfactory.abstracts.AbstractFactory;
-import com.stefanini.hn.abstractfactory.abstracts.Disco;
-import com.stefanini.hn.abstractfactory.abstracts.Memoria;
 
 /**
  * A factory for creating Intel objects.

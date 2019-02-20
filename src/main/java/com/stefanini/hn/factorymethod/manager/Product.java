@@ -1,4 +1,4 @@
-package com.stefanini.hn.factorymethod.abstracts;
+package com.stefanini.hn.factorymethod.manager;
 
 /**
  * Product.

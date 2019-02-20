@@ -1,6 +1,5 @@
 package com.stefanini.hn.builder.manager;
 
-import com.stefanini.hn.builder.abstracts.PizzaBuilder;
 
 public class PicantePizzaBuilder extends PizzaBuilder {
 

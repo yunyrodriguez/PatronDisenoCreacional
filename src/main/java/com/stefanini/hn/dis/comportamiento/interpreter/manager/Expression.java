@@ -1,4 +1,4 @@
-package com.stefanini.hn.dis.comportamiento.interpreter.abstracts;
+package com.stefanini.hn.dis.comportamiento.interpreter.manager;
 
 import com.stefanini.hn.dis.comportamiento.interpreter.manager.Context;
 
